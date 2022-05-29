@@ -19,7 +19,9 @@ fn main() -> Result<(), std::io::Error> {
         .lines().map(|l| l.unwrap().parse().unwrap()).collect();
 
     part_1(&puzzle_depths)?;
-    part_2(&puzzle_depths)
+    part_2(&puzzle_depths)?;
+
+    Ok(())
 }
 
 fn part_1(puzzle_depths: &[isize]) -> Result<(), std::io::Error> {
