@@ -10,10 +10,11 @@ const SAMPLE_DEPTHS: [isize; 10] = [ 99, 200, 208, 210, 200, 207, 240, 269, 260,
 const SAMPLE_INCREASES_PT1: usize = 7;
 const SAMPLE_INCREASES_PT2: usize = 5;
 const PUZZLE_INPUT_PATH: &str = "./puzzle_input.txt";
+const PUZZLE_WINDOW_SIZE: usize = 3;
 
 fn main() -> Result<(), std::io::Error> {
     // Read input file
-    let puzzle_input_file = File::open(PUZZLE_INPUT_PATH)?;
+    let puzzle_input_file = File::open(PUZZLE_INPUT_PATH).expect("Can't find input file");
     let puzzle_depths: Vec<isize> = BufReader::new(puzzle_input_file)
         .lines().map(|l| l.unwrap().parse().unwrap()).collect();
 
@@ -36,14 +37,14 @@ fn part_1(puzzle_depths: &[isize]) -> Result<(), std::io::Error> {
 
 fn part_2(puzzle_depths: &[isize]) -> Result<(), std::io::Error> {
     // Test using sample data
-    let sample_windows = sum_windows(&SAMPLE_DEPTHS, 3);
+    let sample_windows = sum_windows(&SAMPLE_DEPTHS, PUZZLE_WINDOW_SIZE);
     let sample_increases = count_increases(&sample_windows);
     println!("[PT2] Sample increases: {}", sample_increases);
     assert_eq!(sample_windows.len(), 8);
     assert_eq!(sample_increases, SAMPLE_INCREASES_PT2);
 
     // Run on puzzle input
-    let puzzle_windows = sum_windows(puzzle_depths, 3);
+    let puzzle_windows = sum_windows(puzzle_depths, PUZZLE_WINDOW_SIZE);
     let puzzle_increases = count_increases(&puzzle_windows);
     println!("[PT2] Puzzle increases: {}", puzzle_increases);
 
