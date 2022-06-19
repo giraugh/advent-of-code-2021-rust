@@ -1,5 +1,5 @@
 #[cfg(test)]
-mod submarine_test {
+mod test_submarine {
     use super::super::*;  
 
     #[test]

@@ -31,7 +31,7 @@ fn part_1(puzzle_depths: &[isize]) -> Result<(), std::io::Error> {
     assert_eq!(sample_increases, SAMPLE_INCREASES_PT1);
 
     // Run on puzzle input
-    let puzzle_increases = count_increases(&puzzle_depths);
+    let puzzle_increases = count_increases(puzzle_depths);
     println!("[PT1] Puzzle increases: {}", puzzle_increases);
 
     Ok(())

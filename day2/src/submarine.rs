@@ -23,7 +23,7 @@ impl FromStr for Command {
   type Err = &'static str;
 
   fn from_str(string: &str) -> Result<Self, Self::Err> {
-    let mut words = string.split(" ").take(2);
+    let mut words = string.split(' ').take(2);
     let (prefix, arg) = (words.next().unwrap(), words.next().unwrap().parse::<usize>().unwrap());
     match prefix {
       "down" => Ok(Self::Down(arg)),

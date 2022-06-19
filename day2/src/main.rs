@@ -22,12 +22,12 @@ fn main() {
 
 fn part_1(commands: &[submarine::Command]) {
     // Apply commands to determine position
-    let submarine = submarine::Submarine::new().perform_commands(&commands, false);
+    let submarine = submarine::Submarine::new().perform_commands(commands, false);
     println!("[PT1] Position Product: {}", submarine.position_product())
 }
 
 fn part_2(commands: &[submarine::Command]) {
     // Apply commands to determine position (using aim)
-    let submarine = submarine::Submarine::new().perform_commands(&commands, true);
+    let submarine = submarine::Submarine::new().perform_commands(commands, true);
     println!("[PT2] Position Product: {}", submarine.position_product())
 }

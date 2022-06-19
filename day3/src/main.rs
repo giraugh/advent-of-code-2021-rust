@@ -23,7 +23,7 @@ fn main() {
 
 fn part_1(puzzle_input_lines: &[String]) {
     // Determine gamma and epsilon bits
-    let gamma_bits = gamma_bits_from_lines(&puzzle_input_lines);
+    let gamma_bits = gamma_bits_from_lines(puzzle_input_lines);
     let epsilon_bits: Vec<u8> = gamma_bits.iter().map(|x| 1 - x).collect();
 
     // Determine factors
@@ -63,12 +63,12 @@ fn part_2(puzzle_input_lines: &[String]) {
     println!("[PT2] Result: {:?}", result);
 }
 
-fn apply_bit_criteria<F>(bit_rows: &Vec<Vec<u8>>, criteria: F) -> usize
+fn apply_bit_criteria<F>(bit_rows: &[Vec<u8>], criteria: F) -> usize
 where
     F: Fn(&Vec<usize>) -> u8,
 {
     // Make a mutable copy of the rows
-    let mut rows = bit_rows.clone();
+    let mut rows = bit_rows.to_owned();
 
     // Filter until 1 remains
     while rows.len() > 1 {
@@ -103,7 +103,7 @@ fn gamma_bits_from_lines(lines: &[String]) -> Vec<u8> {
 // Convert list of binary digits to integer
 fn convert_bits(bits: &[u8]) -> usize {
     bits.iter()
-        .fold(0 as usize, |acc, &x| (acc << 1) ^ (x as usize))
+        .fold(0_usize, |acc, &x| (acc << 1) ^ (x as usize))
 }
 
 // Apply a predicate to filter a vector but quit early if only one element remains
@@ -146,6 +146,6 @@ mod tests {
 
     #[test]
     fn test_convert_bits() {
-        assert_eq!(convert_bits(&vec!(1, 0, 1)), 5);
+        assert_eq!(convert_bits(&[1, 0, 1]), 5);
     }
 }
