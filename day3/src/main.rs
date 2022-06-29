@@ -44,7 +44,7 @@ fn part_2(puzzle_input_lines: &[String]) {
 
     // Determine oxygen rate
     let oxygen = apply_bit_criteria(&bit_rows, |bits| {
-        match (bits.iter().sum::<usize>()*2).cmp(&bits.len()) {
+        match (bits.iter().sum::<usize>() * 2).cmp(&bits.len()) {
             Less => 0,
             _ => 1,
         }
@@ -52,7 +52,7 @@ fn part_2(puzzle_input_lines: &[String]) {
 
     // Determine co2 rate
     let co2 = apply_bit_criteria(&bit_rows, |bits| {
-        match (bits.iter().sum::<usize>()*2).cmp(&bits.len()) {
+        match (bits.iter().sum::<usize>() * 2).cmp(&bits.len()) {
             Less => 1,
             _ => 0,
         }
@@ -63,10 +63,7 @@ fn part_2(puzzle_input_lines: &[String]) {
     println!("[PT2] Result: {:?}", result);
 }
 
-fn apply_bit_criteria<F>(bit_rows: &[Vec<u8>], criteria: F) -> usize
-where
-    F: Fn(&Vec<usize>) -> u8,
-{
+fn apply_bit_criteria(bit_rows: &[Vec<u8>], criteria: impl Fn(&Vec<usize>) -> u8) -> usize {
     // Make a mutable copy of the rows
     let mut rows = bit_rows.to_owned();
 
@@ -107,9 +104,8 @@ fn convert_bits(bits: &[u8]) -> usize {
 }
 
 // Apply a predicate to filter a vector but quit early if only one element remains
-fn filter_while_many<T, P>(items: &Vec<T>, predicate: P) -> Vec<T>
+fn filter_while_many<T>(items: &Vec<T>, predicate: impl Fn(&T) -> bool) -> Vec<T>
 where
-    P: Fn(&T) -> bool,
     T: Clone,
 {
     let mut dropped = 0;
