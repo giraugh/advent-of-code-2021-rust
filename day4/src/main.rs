@@ -1,5 +1,3 @@
-#![allow(dead_code)]
-
 #[macro_use]
 extern crate itertools;
 
@@ -10,13 +8,13 @@ mod bingo;
  * https://adventofcode.com/2021/day/4
  */
 
+use itertools::Itertools;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::sync::mpsc;
 use std::sync::Arc;
 use std::thread;
 
-use itertools::Itertools;
 const PUZZLE_INPUT_PATH: &str = "./puzzle_input.txt";
 const BOARD_SIZE: usize = 5;
 
@@ -56,7 +54,6 @@ fn main() {
                         return;
                     }
                 }
-                // dbg!(board);
             }));
         }
 
